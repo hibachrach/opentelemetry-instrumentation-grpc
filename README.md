@@ -1,24 +1,48 @@
-# Opentelemetry::Instrumentation::Grpc
+# OpenTelemetry::Instrumentation::Grpc
 
-TODO: Delete this and the text below, and describe your gem
+OpenTelemetry instrumentation for users of the `grpc` gem
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/opentelemetry/instrumentation/grpc`. To experiment with that code, run `bin/console` for an interactive prompt.
+> [!WARNING]
+> Right now, the gem only instruments outbound requests to gRPC services
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+    $ bundle add opentelemetry-instrumentation-grpc
 
 If bundler is not being used to manage dependencies, install the gem by executing:
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
+    $ gem install opentelemetry-instrumentation-grpc
 
 ## Usage
 
-TODO: Write usage instructions here
+To use the instrumentation, call `use` with the name of the instrumentation:
+
+```ruby
+OpenTelemetry::SDK.configure do |c|
+  c.use 'OpenTelemetry::Instrumentation::Grpc', {
+    peer_service: "Example",
+    allowed_metadata_headers: [],
+  }
+end
+```
+
+Alternatively, you can also call `use_all` to install all the available
+instrumentation.
+
+```ruby
+OpenTelemetry::SDK.configure do |c|
+  c.use_all
+end
+```
+
+You *also* need to make sure your stubs are using the interceptor, e.g.
+
+```
+otel = OpenTelemetry::Instrumentation::Grpc.client_interceptor
+SomeService::Stub.new(host, credentials, *args, **kwargs, interceptors: [otel])
+```
 
 ## Development
 
@@ -28,7 +52,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/opentelemetry-instrumentation-grpc. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/opentelemetry-instrumentation-grpc/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/hibachrach/opentelemetry-instrumentation-grpc. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/opentelemetry-instrumentation-grpc/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 
@@ -36,4 +60,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Opentelemetry::Instrumentation::Grpc project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/opentelemetry-instrumentation-grpc/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the OpenTelemetry::Instrumentation::Grpc project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/opentelemetry-instrumentation-grpc/blob/main/CODE_OF_CONDUCT.md).

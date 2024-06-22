@@ -1,6 +1,12 @@
 # frozen_string_literal: true
 
-require "opentelemetry/instrumentation/grpc"
+require 'opentelemetry/sdk'
+require 'grpc'
+
+require 'opentelemetry/instrumentation/grpc'
+require 'example/proto/example_api_pb'
+require 'example/proto/example_api_services_pb'
+
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
@@ -12,4 +18,11 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+end
+
+EXPORTER = OpenTelemetry::SDK::Trace::Export::InMemorySpanExporter.new
+span_processor = OpenTelemetry::SDK::Trace::Export::SimpleSpanProcessor.new(EXPORTER)
+
+OpenTelemetry::SDK.configure do |c|
+  c.add_span_processor span_processor
 end

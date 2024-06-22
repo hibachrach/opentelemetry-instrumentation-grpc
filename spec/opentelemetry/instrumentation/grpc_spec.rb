@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Opentelemetry::Instrumentation::Grpc do
+RSpec.describe OpenTelemetry::Instrumentation::Grpc do
   it "has a version number" do
-    expect(Opentelemetry::Instrumentation::Grpc::VERSION).not_to be nil
-  end
-
-  it "does something useful" do
-    expect(false).to eq(true)
+    expect(OpenTelemetry::Instrumentation::Grpc::VERSION).not_to be nil
   end
 end

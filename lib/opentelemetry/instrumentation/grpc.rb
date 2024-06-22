@@ -1,12 +1,23 @@
 # frozen_string_literal: true
 
-require_relative "grpc/version"
+require 'opentelemetry'
+require 'opentelemetry-instrumentation-base'
+require 'active_support/inflector'
 
-module Opentelemetry
+module OpenTelemetry
   module Instrumentation
+    # Contains the OpenTelemetry instrumentation for the Gruf gem
     module Grpc
       class Error < StandardError; end
-      # Your code goes here...
+
+      module_function
+
+      def client_interceptor
+        Interceptors::Client.new
+      end
     end
   end
 end
+
+require_relative 'grpc/instrumentation'
+require_relative 'grpc/version'

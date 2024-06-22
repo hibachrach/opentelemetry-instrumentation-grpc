@@ -4,7 +4,7 @@ require_relative "lib/opentelemetry/instrumentation/grpc/version"
 
 Gem::Specification.new do |spec|
   spec.name = "opentelemetry-instrumentation-grpc"
-  spec.version = Opentelemetry::Instrumentation::Grpc::VERSION
+  spec.version = OpenTelemetry::Instrumentation::Grpc::VERSION
   spec.authors = ["Hazel Bachrach"]
   spec.email = ["hbachrach@dropbox.com"]
 
@@ -33,7 +33,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_dependency "opentelemetry-instrumentation-base", "~> 0.22.4"
+  spec.add_dependency "opentelemetry-api", "~> 1.2"
+  spec.add_runtime_dependency "activesupport", "> 4"
+
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

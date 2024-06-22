@@ -2,15 +2,64 @@ PATH
   remote: .
   specs:
     opentelemetry-instrumentation-grpc (0.1.0)
+      activesupport (> 4)
+      opentelemetry-api (~> 1.2)
+      opentelemetry-instrumentation-base (~> 0.22.4)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    activesupport (7.1.3.4)
+      base64
+      bigdecimal
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      connection_pool (>= 2.2.5)
+      drb
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      mutex_m
+      tzinfo (~> 2.0)
     ast (2.4.2)
+    base64 (0.2.0)
+    bigdecimal (3.1.8)
+    concurrent-ruby (1.3.3)
+    connection_pool (2.4.1)
     diff-lcs (1.5.1)
+    drb (2.2.1)
+    google-protobuf (3.25.3)
+    google-protobuf (3.25.3-arm64-darwin)
+    googleapis-common-protos-types (1.15.0)
+      google-protobuf (>= 3.18, < 5.a)
+    grpc (1.64.0)
+      google-protobuf (~> 3.25)
+      googleapis-common-protos-types (~> 1.0)
+    grpc (1.64.0-arm64-darwin)
+      google-protobuf (~> 3.25)
+      googleapis-common-protos-types (~> 1.0)
+    i18n (1.14.5)
+      concurrent-ruby (~> 1.0)
     json (2.7.2)
     language_server-protocol (3.17.0.3)
     lint_roller (1.1.0)
+    minitest (5.24.0)
+    mutex_m (0.2.0)
+    opentelemetry-api (1.2.5)
+    opentelemetry-common (0.21.0)
+      opentelemetry-api (~> 1.0)
+    opentelemetry-instrumentation-base (0.22.4)
+      opentelemetry-api (~> 1.0)
+      opentelemetry-common (~> 0.21)
+      opentelemetry-registry (~> 0.1)
+    opentelemetry-registry (0.3.1)
+      opentelemetry-api (~> 1.1)
+    opentelemetry-sdk (1.4.1)
+      opentelemetry-api (~> 1.1)
+      opentelemetry-common (~> 0.20)
+      opentelemetry-registry (~> 0.2)
+      opentelemetry-semantic_conventions
+    opentelemetry-semantic_conventions (1.10.0)
+      opentelemetry-api (~> 1.0)
+    opentelemetry-test-helpers (0.4.0)
     parallel (1.25.1)
     parser (3.3.3.0)
       ast (~> 2.4.1)
@@ -64,6 +113,8 @@ GEM
       lint_roller (~> 1.1)
       rubocop-performance (~> 1.21.0)
     strscan (3.1.0)
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
 
 PLATFORMS
@@ -71,7 +122,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  grpc
   opentelemetry-instrumentation-grpc!
+  opentelemetry-sdk (~> 1.0)
+  opentelemetry-test-helpers
   rake (~> 13.0)
   rspec (~> 3.0)
   standard (~> 1.3)

@@ -1,4 +1,4 @@
-module Opentelemetry
+module OpenTelemetry
   module Instrumentation
     module Grpc
       VERSION: String
