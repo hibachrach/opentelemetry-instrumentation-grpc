@@ -5,4 +5,4 @@ module OpenTelemetry
   end
 end
 
-require_relative 'instrumentation/grpc'
+require_relative "instrumentation/grpc"

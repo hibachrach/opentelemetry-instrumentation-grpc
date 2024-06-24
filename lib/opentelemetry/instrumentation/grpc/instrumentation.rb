@@ -18,9 +18,9 @@ module OpenTelemetry
 
         private
 
-          def require_dependencies
-            require_relative 'interceptors/client'
-          end
+        def require_dependencies
+          require_relative "interceptors/client"
+        end
       end
     end
   end

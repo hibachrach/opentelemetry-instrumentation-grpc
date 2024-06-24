@@ -6,19 +6,19 @@ module OpenTelemetry
       module Interceptors
         class Client < ::GRPC::ClientInterceptor
           def request_response(request: nil, call: nil, method: nil, metadata: nil, &blk)
-            call(type: 'request_response', requests: [request], call: call, method: method, metadata: metadata, &blk)
+            call(type: "request_response", requests: [request], call: call, method: method, metadata: metadata, &blk)
           end
 
           def client_streamer(requests: nil, call: nil, method: nil, metadata: nil, &blk)
-            call(type: 'client_streamer', requests: requests, call: call, method: method, metadata: metadata, &blk)
+            call(type: "client_streamer", requests: requests, call: call, method: method, metadata: metadata, &blk)
           end
 
           def server_streamer(request: nil, call: nil, method: nil, metadata: nil, &blk)
-            call(type: 'server_streamer', requests: [request], call: call, method: method, metadata: metadata, &blk)
+            call(type: "server_streamer", requests: [request], call: call, method: method, metadata: metadata, &blk)
           end
 
           def bidi_streamer(request: nil, call: nil, method: nil, metadata: nil, &blk)
-            call(type: 'client_streamer', requests: requests, call: call, method: method, metadata: metadata, &blk)
+            call(type: "client_streamer", requests: requests, call: call, method: method, metadata: metadata, &blk)
           end
 
           private
@@ -26,18 +26,17 @@ module OpenTelemetry
           def call(type:, requests: nil, call: nil, method: nil, metadata: nil)
             return yield if instrumentation_config.empty?
 
-            method_parts = method.to_s.split('/')
+            method_parts = method.to_s.split("/")
             service = method_parts[1]
             method_name = method_parts.last
-            method_name_with_service = [service.underscore, method].join('.').downcase
 
             attributes = {
-              OpenTelemetry::SemanticConventions::Trace::RPC_SYSTEM => 'grpc',
+              OpenTelemetry::SemanticConventions::Trace::RPC_SYSTEM => "grpc",
               OpenTelemetry::SemanticConventions::Trace::RPC_SERVICE => service,
-              OpenTelemetry::SemanticConventions::Trace::RPC_METHOD => method,
+              OpenTelemetry::SemanticConventions::Trace::RPC_METHOD => method_name,
               OpenTelemetry::SemanticConventions::Trace::PEER_SERVICE => instrumentation_config[:peer_service],
-              'rpc.type' => type,
-              'net.sock.peer.addr' => call.instance_variable_get(:@wrapped)&.peer
+              "rpc.type" => type,
+              "net.sock.peer.addr" => call.instance_variable_get(:@wrapped)&.peer
             }.compact
 
             attributes.merge!(allowed_metadata_headers(metadata.transform_keys(&:to_s)))
@@ -51,7 +50,7 @@ module OpenTelemetry
               yield.tap do
                 span&.set_attribute(OpenTelemetry::SemanticConventions::Trace::RPC_GRPC_STATUS_CODE, 0)
               end
-            rescue StandardError => e
+            rescue => e
               span&.set_attribute(OpenTelemetry::SemanticConventions::Trace::RPC_GRPC_STATUS_CODE, e.code)
               raise e
             end

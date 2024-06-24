@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'opentelemetry'
-require 'opentelemetry-instrumentation-base'
-require 'active_support/inflector'
+require "opentelemetry"
+require "opentelemetry-instrumentation-base"
+require "active_support/inflector"
 
 module OpenTelemetry
   module Instrumentation
@@ -19,5 +19,5 @@ module OpenTelemetry
   end
 end
 
-require_relative 'grpc/instrumentation'
-require_relative 'grpc/version'
+require_relative "grpc/instrumentation"
+require_relative "grpc/version"

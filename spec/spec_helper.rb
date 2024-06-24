@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
-require 'opentelemetry/sdk'
-require 'grpc'
+require "opentelemetry/sdk"
+require "grpc"
 
-require 'opentelemetry/instrumentation/grpc'
-require 'example/proto/example_api_pb'
-require 'example/proto/example_api_services_pb'
-
+require "opentelemetry/instrumentation/grpc"
+require "example/proto/example_api_pb"
+require "example/proto/example_api_services_pb"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
