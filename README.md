@@ -39,7 +39,7 @@ end
 
 You *also* need to make sure your stubs are using the interceptor, e.g.
 
-```
+```ruby
 otel = OpenTelemetry::Instrumentation::Grpc.client_interceptor
 SomeService::Stub.new(host, credentials, *args, **kwargs, interceptors: [otel])
 ```
