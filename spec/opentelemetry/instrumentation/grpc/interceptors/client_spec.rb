@@ -30,6 +30,7 @@ RSpec.describe OpenTelemetry::Instrumentation::Grpc::Interceptors::Client do
       expect(span.kind).to eq(:client)
       expect(span.attributes["rpc.system"]).to eq("grpc")
       expect(span.attributes["rpc.type"]).to eq("request_response")
+      expect(span.name).to eq("proto.example.ExampleAPI/Example")
     end
 
     describe "with allowed_metadata_headers" do

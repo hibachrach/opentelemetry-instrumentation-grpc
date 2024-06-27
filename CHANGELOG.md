@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+- Align span naming with spec
+
 ## [0.1.1] - 2024-06-26
 
 - Fix `uninitialized constant Interceptors` error
