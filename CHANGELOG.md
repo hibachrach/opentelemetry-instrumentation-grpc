@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+## [0.1.2] - 2024-06-26
+
 - Align span naming with spec
 
 ## [0.1.1] - 2024-06-26
