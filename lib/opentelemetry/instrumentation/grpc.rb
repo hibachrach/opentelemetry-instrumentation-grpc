@@ -20,4 +20,5 @@ module OpenTelemetry
 end
 
 require_relative "grpc/instrumentation"
+require_relative "grpc/interceptors/client"
 require_relative "grpc/version"
