@@ -44,7 +44,7 @@ module OpenTelemetry
             instrumentation_tracer.in_span(
               # The specification requires there be no leading slash
               # https://github.com/open-telemetry/semantic-conventions/blob/5a2836bbea0b6e105b98370f331a7661bcf19540/docs/rpc/rpc-spans.md?plain=1#L63-L69
-              method.to_s.delete_prefix('/'),
+              method.to_s.delete_prefix("/"),
               attributes: attributes,
               kind: OpenTelemetry::Trace::SpanKind::CLIENT
             ) do |span|

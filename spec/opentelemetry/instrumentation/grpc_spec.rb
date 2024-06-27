@@ -5,7 +5,7 @@ RSpec.describe OpenTelemetry::Instrumentation::Grpc do
     expect(OpenTelemetry::Instrumentation::Grpc::VERSION).not_to be nil
   end
 
-  describe '.client_interceptor' do
+  describe ".client_interceptor" do
     it { expect(described_class.client_interceptor).to be_a(OpenTelemetry::Instrumentation::Grpc::Interceptors::Client) }
   end
 end
