@@ -1,5 +1,8 @@
 # OpenTelemetry::Instrumentation::Grpc
 
+[![Gem Version](https://badge.fury.io/rb/opentelemetry-instrumentation-grpc.svg)](https://badge.fury.io/rb/opentelemetry-instrumentation-grpc)
+[![GitHub Actions CI Status](https://github.com/hibachrach/opentelemetry-instrumentation-grpc/actions/workflows/main.yml/badge.svg)](https://github.com/hibachrach/opentelemetry-instrumentation-grpc/actions?query=branch%3Amain)
+
 OpenTelemetry instrumentation for users of the `grpc` gem
 
 > [!WARNING]
