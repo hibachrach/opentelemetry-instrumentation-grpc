@@ -17,7 +17,7 @@ module OpenTelemetry
             call(type: "server_streamer", requests: [request], call: call, method: method, metadata: metadata, &blk)
           end
 
-          def bidi_streamer(request: nil, call: nil, method: nil, metadata: nil, &blk)
+          def bidi_streamer(requests: nil, call: nil, method: nil, metadata: nil, &blk)
             call(type: "client_streamer", requests: requests, call: call, method: method, metadata: metadata, &blk)
           end
 

@@ -1,5 +1,7 @@
 ## [Unreleased]
 
+- Fix error in method signature for OpenTelemetry::Instrumentation::Grpc.client_interceptor [#1](https://github.com/hibachrach/opentelemetry-instrumentation-grpc/pull/1)
+
 ## [0.1.2] - 2024-06-26
 
 - Align span naming with spec
