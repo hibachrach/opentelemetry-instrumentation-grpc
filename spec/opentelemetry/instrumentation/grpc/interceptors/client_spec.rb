@@ -45,17 +45,32 @@ RSpec.describe OpenTelemetry::Instrumentation::Grpc::Interceptors::Client do
     end
   end
 
-  describe "raise error" do
-    let(:block) { proc { raise StandardError } }
+  describe "raise non-gRPC related error" do
+    let(:error_class) { Class.new(StandardError) }
+    let(:block) { proc { raise error_class } }
 
     it "gets response and finish span" do
-      expect { client_call }.to raise_error
+      expect { client_call }.to raise_error(error_class)
       expect(exporter.finished_spans.size).to eq(1)
       expect(span.kind).to eq(:client)
       expect(span.attributes["rpc.system"]).to eq("grpc")
       expect(span.attributes["rpc.type"]).to eq("request_response")
       expect(span.events.size).to eq(1)
       expect(span.events.first.name).to eq("exception")
+    end
+  end
+
+  describe "raise gRPC related error" do
+    let(:block) { proc { raise ::GRPC::NotFound } }
+
+    it "gets response and finish span, setting code correctly" do
+      expect { client_call }.to raise_error(::GRPC::NotFound)
+      expect(exporter.finished_spans.size).to eq(1)
+      expect(span.kind).to eq(:client)
+      expect(span.attributes["rpc.system"]).to eq("grpc")
+      expect(span.attributes["rpc.type"]).to eq("request_response")
+      expect(span.attributes["rpc.grpc.status_code"]).to eq(::GRPC::NotFound.new.code)
+      expect(span.events.size).to eq(1)
     end
   end
 end

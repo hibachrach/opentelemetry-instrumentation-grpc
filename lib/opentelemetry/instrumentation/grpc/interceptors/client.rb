@@ -52,7 +52,7 @@ module OpenTelemetry
               yield.tap do
                 span&.set_attribute(OpenTelemetry::SemanticConventions::Trace::RPC_GRPC_STATUS_CODE, 0)
               end
-            rescue => e
+            rescue ::GRPC::BadStatus => e
               span&.set_attribute(OpenTelemetry::SemanticConventions::Trace::RPC_GRPC_STATUS_CODE, e.code)
               raise e
             end
